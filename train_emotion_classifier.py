@@ -10,7 +10,7 @@ run = wandb.init()
 config = run.config
 # parameters
 config.batch_size = 32
-config.num_epochs = 10000
+config.num_epochs = 5
 input_shape = (64, 64, 1)
 
 wandb_callback=  WandbKerasCallback(save_model=False)
@@ -18,7 +18,7 @@ wandb_callback=  WandbKerasCallback(save_model=False)
 
 def load_fer2013():
     
-    data = pd.read_csv("datasets/fer2013/fer2013.csv")
+    data = pd.read_csv("fer2013/fer2013.csv")
     pixels = data['pixels'].tolist()
     width, height = 48, 48
     faces = []
@@ -55,7 +55,7 @@ model.fit(train_faces, train_emotions, batch_size=config.batch_size,
                     epochs=config.num_epochs, verbose=1, callbacks=[wandb_callback],
                     validation_data=(val_faces, val_emotions))
 
-
+model.save("emotion.h5")
 
 
 
