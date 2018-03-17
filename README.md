@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 ## Get the training data
 
-Go to https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar?dl=0 and click Download.
+Go to https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar and click Download.
 
 Move the file into the root directory of this project and then run
 
