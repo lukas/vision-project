@@ -1,4 +1,4 @@
 [default]
-entity: l2k2
-project: another-small-project
+entity: ml-class
+project: emotion-mar17
 base_url: https://api.wandb.ai
