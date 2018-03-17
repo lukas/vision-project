@@ -1,0 +1,4 @@
+[default]
+entity: l2k2
+project: another-small-project
+base_url: https://api.wandb.ai
