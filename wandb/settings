@@ -1,4 +1,4 @@
 [default]
-entity: ml-class
-project: emotion-mar17
+entity: qualcomm
+project: emotion-apr9
 base_url: https://api.wandb.ai
