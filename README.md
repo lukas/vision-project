@@ -3,7 +3,7 @@
 
 ## Packages
 ```
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 ```
 
 ## Get the training data
