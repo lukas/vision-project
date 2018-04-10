@@ -1,9 +1,11 @@
 from keras.layers import Dense, Flatten
 from keras.models import Sequential
+from keras.callbacks import Callback
 import pandas as pd
 import wandb
 import numpy as np
 import cv2
+from PIL import Image
 from wandb.wandb_keras import WandbKerasCallback
 
 run = wandb.init()
@@ -11,9 +13,7 @@ config = run.config
 # parameters
 config.batch_size = 32
 config.num_epochs = 5
-input_shape = (64, 64, 1)
-
-wandb_callback=  WandbKerasCallback(save_model=False)
+input_shape = (48, 48, 1)
 
 
 def load_fer2013():
@@ -23,8 +23,7 @@ def load_fer2013():
     width, height = 48, 48
     faces = []
     for pixel_sequence in pixels:
-        face = [int(pixel) for pixel in pixel_sequence.split(' ')]
-        face = np.asarray(face).reshape(width, height)
+        face = np.asarray(pixel_sequence.split(' '), dtype=np.uint8).reshape(width, height)
         face = cv2.resize(face.astype('uint8'), (width, height))
         faces.append(face.astype('float32'))
 
@@ -44,15 +43,32 @@ def load_fer2013():
 train_faces, train_emotions, val_faces, val_emotions = load_fer2013()
 num_samples, num_classes = train_emotions.shape
 
+wandb_callback = WandbKerasCallback(
+    save_model=False 
+)
+
+class Images(Callback):
+      def on_epoch_end(self, epoch, logs):
+            labels=["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
+            indices = np.random.randint(self.validation_data[0].shape[0], size=8)
+            test_data = self.validation_data[0][indices]
+            pred_data = self.model.predict(test_data)
+            run.history.row.update({
+                  "examples": [
+                        wandb.Image(Image.fromarray(data.reshape(48,48)), caption=labels[np.argmax(pred_data[i])])
+                        for i, data in enumerate(test_data)]
+            })
+
+
 model = Sequential()
-model.add(Flatten(input_shape=(48,48,1)))
+model.add(Flatten(input_shape=input_shape))
 model.add(Dense(num_classes, activation="softmax"))
 
 model.compile(optimizer='adam', loss='categorical_crossentropy',
 metrics=['accuracy'])
 
 model.fit(train_faces, train_emotions, batch_size=config.batch_size,
-                    epochs=config.num_epochs, verbose=1, callbacks=[wandb_callback],
+                    epochs=config.num_epochs, verbose=1, callbacks=[Images(), wandb_callback],
                     validation_data=(val_faces, val_emotions))
 
 model.save("emotion.h5")
