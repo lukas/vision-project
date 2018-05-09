@@ -68,7 +68,8 @@ model.compile(optimizer='adam', loss='categorical_crossentropy',
 metrics=['accuracy'])
 
 model.fit(train_faces, train_emotions, batch_size=config.batch_size,
-                    epochs=config.num_epochs, verbose=1, callbacks=[WandbCallback(), Images()], validation_data=(val_faces, val_emotions))
+      epochs=config.num_epochs, 
+          verbose=1, callbacks=[WandbCallback(), Images()], validation_data=(val_faces, val_emotions))
 
 
 model.save("emotion.h5")
