@@ -23,7 +23,7 @@ input_shape = (48, 48, 1)
 def load_fer2013():
     if not os.path.exists("fer2013"):
         print("Downloading the face emotion dataset...")
-        subprocess.check_output("curl -SL https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar | tar x", shell=True)
+        subprocess.check_output("curl -SL https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar | tar xz", shell=True)
     data = pd.read_csv("fer2013/fer2013.csv")
     pixels = data['pixels'].tolist()
     width, height = 48, 48
