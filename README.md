@@ -1,5 +1,5 @@
 
-# Installation 
+# Manual Instructions
 
 ## Packages
 ```
@@ -11,14 +11,13 @@ sudo pip install -r requirements.txt
 Move the file into the root directory of this project and then run
 
 ```
-wget https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar
-tar xf fer2013.tar
+curl -SL https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar | tar x
 ```
 
 # Training
 
 ```
-wandb run python train_emotion_classifier.py
+python train_emotion_classifier.py
 ```
 
 # Testing
