@@ -1,4 +1,4 @@
 [default]
 entity: qualcomm
-project: emotion-july30
+project: emotion-aug20
 base_url: https://api.wandb.ai
