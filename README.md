@@ -1,19 +1,4 @@
 
-# Manual Instructions
-
-## Packages
-```
-sudo pip install -r requirements.txt
-```
-
-## Get the training data
-
-Move the file into the root directory of this project and then run
-
-```
-curl -SL https://www.dropbox.com/s/opuvvdv3uligypx/fer2013.tar | tar x
-```
-
 # Training
 
 ```
@@ -21,6 +6,7 @@ python train_emotion_classifier.py
 ```
 
 # Testing
+
 ```
 python run_classifier.py test.jpg
 ```
