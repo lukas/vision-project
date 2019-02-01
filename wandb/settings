@@ -1,4 +1,4 @@
 [default]
 entity: qualcomm
-project: vision-jan31
+project: vision-feb1
 base_url: https://api.wandb.ai
