@@ -1,5 +1,5 @@
 [default]
 entity = qualcomm
-project = emotion-dec4
+project = emotion-feb6
 base_url = https://api.wandb.ai
 
